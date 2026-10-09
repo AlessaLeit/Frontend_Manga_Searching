@@ -50,7 +50,7 @@ export function MangaCard({ mangaInfo, media }) {
 
   return (
     <article>
-        <img src="\default-manga-image3.png" alt="imagem do anuncio" className='img-card' />
+        <img src={mangaInfo.imagem} alt="imagem do anuncio" className='img-card' />
         
         <div className='info-card'>
             <p className='autor'>de {mangaInfo.autor}</p>
