@@ -72,3 +72,56 @@
   flex-wrap: wrap;
   gap: 20px;
 }
+
+.home-page__results {
+  width: min(100%, 1400px);
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: resultsEntrance 600ms
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.manga-result__count {
+  width: 100%;
+  margin-bottom: 16px;
+  color: #59504a;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: left;
+}
+
+.manga-result {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.manga-result__empty {
+  width: 100%;
+  padding: 32px 16px;
+  color: #59504a;
+  text-align: center;
+  font-size: 1rem;
+}
+
+@keyframes resultsEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-page__results {
+    animation: none;
+  }
+}

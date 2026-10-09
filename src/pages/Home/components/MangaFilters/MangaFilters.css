@@ -1,0 +1,149 @@
+.manga-filters {
+  width: min(100%, 1400px);
+  box-sizing: border-box;
+  margin: 28px 0 24px;
+  padding: 22px;
+  border: 1px solid rgba(89, 80, 74, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 250, 228, 0.94);
+  box-shadow: 0 8px 24px rgba(44, 44, 44, 0.07);
+
+  animation: filtersEntrance 700ms
+    cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.manga-filters__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.manga-filters__header h2 {
+  color: #59504a;
+  font-size: 1.25rem;
+}
+
+.manga-filters__reset {
+  padding: 8px 12px;
+  border: 1px solid rgba(89, 80, 74, 0.25);
+  border-radius: 9px;
+  background: transparent;
+  color: #59504a;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+.manga-filters__reset:hover {
+  background: #ed5a5a;
+  border-color: #ed5a5a;
+  color: white;
+}
+
+.manga-filters__controls {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.manga-filters__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.manga-filters__field span {
+  color: #7b6f67;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.manga-filters__field select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #d7c8b7;
+  border-radius: 9px;
+  outline: none;
+  background: #fffdf6;
+  color: #59504a;
+  font: inherit;
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.manga-filters__field select:focus-visible {
+  border-color: #ed5a5a;
+  box-shadow: 0 0 0 3px rgba(237, 90, 90, 0.16);
+}
+
+@keyframes filtersEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 1100px) {
+  .manga-filters__controls {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .manga-filters {
+    padding: 16px;
+    margin-top: 22px;
+  }
+
+  .manga-filters__header {
+    align-items: flex-start;
+  }
+
+  .manga-filters__header h2 {
+    font-size: 1.1rem;
+  }
+
+  .manga-filters__controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 10px;
+  }
+
+  .manga-filters__field select {
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .manga-filters__controls {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .manga-filters {
+    animation: none;
+  }
+
+  .manga-filters__reset,
+  .manga-filters__field select {
+    transition: none;
+  }
+}
