@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { normalizeHttpError } from "../shared/errors/normalizeHttpError";
 
-const apiBaseUrl = "http://127.0.0.1:8000";
+const apiBaseUrl = import.meta.env.VITE_API_URL;
 
 /** Sem timeout, uma API travada deixaria a interface carregando para sempre. */
 export const REQUEST_TIMEOUT_MS = 10_000_000;
