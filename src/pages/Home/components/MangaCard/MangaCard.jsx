@@ -50,7 +50,16 @@ export function MangaCard({ mangaInfo, media }) {
 
   return (
     <article>
-        <img src={mangaInfo.imagem} alt="imagem do anuncio" className='img-card' />
+        {/* `no-referrer` é necessário para a OLX: o img.olx.com.br responde 403
+            quando o Referer não é de um domínio dela (proteção contra
+            hotlink), e as 17 capas da OLX apareciam quebradas. Sem Referer,
+            responde 200. */}
+        <img
+          src={mangaInfo.imagem}
+          alt="imagem do anuncio"
+          className='img-card'
+          referrerPolicy="no-referrer"
+        />
         
         <div className='info-card'>
             <p className='autor'>de {mangaInfo.autor}</p>
