@@ -4,6 +4,7 @@ export function MangaFilters({
   filters,
   setFilters,
   authors,
+  sources,
   shops,
   onReset,
 }) {
@@ -73,6 +74,23 @@ export function MangaFilters({
             {authors.map((author) => (
               <option key={author} value={author}>
                 {author}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="manga-filters__field">
+          <span>Fonte</span>
+          <select
+            value={filters.source}
+            onChange={(event) =>
+              updateFilter("source", event.target.value)
+            }
+          >
+            <option value="">Todas as fontes</option>
+            {sources.map((source) => (
+              <option key={source} value={source}>
+                {source}
               </option>
             ))}
           </select>
