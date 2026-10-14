@@ -71,6 +71,13 @@ export function MangaCard({ mangaInfo, media }) {
 
             <div className='bottom-card'>
 
+              {/* A fonte é de onde o anúncio veio (OLX, Enjoei...); a loja é
+                  quem está vendendo. Nem sempre coincidem: "panini" parece
+                  editora, mas é o apelido de um vendedor da Enjoei. */}
+              {mangaInfo.fonte && (
+                <p className='source-txt'>{mangaInfo.fonte}</p>
+              )}
+
               <p className='shop-txt'>Loja: {mangaInfo.loja}</p>
 
               <a className='redirect-box' href={mangaInfo.link} target="_blank" rel="noopener noreferrer">

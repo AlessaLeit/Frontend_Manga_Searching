@@ -44,6 +44,7 @@ const INITIAL_FILTERS = {
   condition: "",
   priceOrder: "",
   author: "",
+  source: "",
   shop: "",
   priceRange: "",
 };
@@ -52,7 +53,9 @@ export function HomePage() {
   const [result, setResult] = useState(null);
   const [filters, setFilters] = useState(INITIAL_FILTERS);
 
-  const mangas = result?.options ?? [];
+  // Sem o useMemo, `?? []` cria um array novo a cada render e invalida todos
+  // os useMemo abaixo — os filtros seriam recalculados sem nada ter mudado.
+  const mangas = useMemo(() => result?.options ?? [], [result]);
   const averagePrice = parsePrice(result?.priceAvg);
 
   // Os filtros são montados com base nos resultados da pesquisa atual.
@@ -67,6 +70,19 @@ export function HomePage() {
               ? "Autor não informado"
               : author;
           })
+          .filter(Boolean),
+      ),
+    ].sort((a, b) => a.localeCompare(b, "pt-BR"));
+  }, [mangas]);
+
+  // A fonte é de onde o anúncio veio. Diferente da loja, ela vem sempre de um
+  // conjunto fechado ("OLX", "Enjoei", "Bing Shopping"...), o que faz dela o
+  // filtro mais confiável: a loja é texto livre do anúncio.
+  const sources = useMemo(() => {
+    return [
+      ...new Set(
+        mangas
+          .map((manga) => manga.fonte?.trim())
           .filter(Boolean),
       ),
     ].sort((a, b) => a.localeCompare(b, "pt-BR"));
@@ -92,6 +108,7 @@ export function HomePage() {
           ? "Autor não informado"
           : manga.autor.trim();
 
+      const source = manga.fonte?.trim() ?? "";
       const shop = manga.loja?.trim() ?? "";
       const price = parsePrice(manga.preco);
 
@@ -105,6 +122,13 @@ export function HomePage() {
       if (
         filters.author &&
         normalizeText(author) !== normalizeText(filters.author)
+      ) {
+        return false;
+      }
+
+      if (
+        filters.source &&
+        normalizeText(source) !== normalizeText(filters.source)
       ) {
         return false;
       }
@@ -180,6 +204,7 @@ export function HomePage() {
               filters={filters}
               setFilters={setFilters}
               authors={authors}
+              sources={sources}
               shops={shops}
               onReset={resetFilters}
             />
@@ -197,7 +222,7 @@ export function HomePage() {
               <div className="manga-result">
                 {filteredMangas.map((mangaInfo, index) => (
                   <MangaCard
-                    key={`${mangaInfo.nome}-${mangaInfo.loja}-${index}`}
+                    key={`${mangaInfo.fonte}-${mangaInfo.nome}-${mangaInfo.loja}-${index}`}
                     mangaInfo={mangaInfo}
                     media={averagePrice}
                   />

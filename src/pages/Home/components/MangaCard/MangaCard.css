@@ -90,11 +90,28 @@ a {
     color: #47403B;
 }
 
+/* Selo da fonte: de onde o anúncio veio. Fica acima da loja, discreto, para
+   não competir com o preço — é contexto, não a informação principal. */
+.source-txt {
+    display: inline-block;
+    float: right;
+    clear: both;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background-color: #EFE9E4;
+    color: #7B6F67;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 6px;
+}
+
 .shop-txt {
     font-weight: 700;
     color: #7B6F67;
     text-align: end;
     margin-bottom: 5px;
+    clear: both;
 }
 
 .media-txt,
