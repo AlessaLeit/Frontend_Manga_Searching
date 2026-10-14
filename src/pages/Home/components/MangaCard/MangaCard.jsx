@@ -87,7 +87,13 @@ export function MangaCard({ mangaInfo, media }) {
                 <p className='source-txt'>{mangaInfo.fonte}</p>
               )}
 
-              <p className='shop-txt'>Loja: {mangaInfo.loja}</p>
+              {/* Estante Virtual, MangaDex e OLX não expõem o vendedor na
+                  listagem, e a API preenche `loja` com o nome da própria
+                  fonte para o campo nunca vir vazio. Mostrar as duas linhas
+                  aí repetiria o mesmo texto ("OLX" sobre "Loja: OLX"). */}
+              {mangaInfo.loja && mangaInfo.loja !== mangaInfo.fonte && (
+                <p className='shop-txt'>Loja: {mangaInfo.loja}</p>
+              )}
 
               <a className='redirect-box' href={mangaInfo.link} target="_blank" rel="noopener noreferrer">
 
